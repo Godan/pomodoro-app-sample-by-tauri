@@ -1,15 +1,33 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Time :time="time_sec" />
+  <button v-on:click="startTimer" >start</button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Time from './components/Time.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Time
+  },
+  data: () => {
+    return {
+      time_sec: 1801
+
+    }
+  },
+  methods: {
+     countdown: function() {
+      if (this.time_sec >= 1) {
+        this.time_sec--;
+      }
+    },
+    startTimer: function() {
+      this.timer = setInterval(() => this.countdown(), 1000);
+      this.resetButton = true;
+    },
   }
 }
 </script>
